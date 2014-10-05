@@ -1,0 +1,6 @@
+SET(CMAKE_CXX_FLAGS "-std=c++11")
+
+ADD_LIBRARY(libs_indexer indexer.cpp)
+
+TARGET_INCLUDE_DIRECTORIES(libs_indexer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
