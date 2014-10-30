@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('search') }}" method=post class=search>
+      <dl>
+        <dt>Input word:
+        <dd><input type=text size=30 name=word>
+      </dl>
+    </form>
+  <ul class=sentences>
+  {% for sentence in sentences %}
+    <li>{{ sentence }}
+  {% else %}
+    <em>created by Yo-Yo group</em>
+  {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}
