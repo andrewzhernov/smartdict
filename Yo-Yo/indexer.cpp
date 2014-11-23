@@ -19,11 +19,11 @@ void TIndexer::IndexText(const std::string& text) {
     parser.SplitText(text, sentences);
     for (const auto& sentence : sentences) {
 
-		int next_id = SentenceIndex.size();
-		if(SentenceIndex.find(sentence) != SentenceIndex.end()) continue;
+	int next_id = SentenceIndex.size();
+	if(SentenceIndex.find(sentence) != SentenceIndex.end()) continue;
 
-		SentenceIndex.insert(std::pair<std::string, int>(sentence, Sentences.size()));
-		Sentences.push_back(sentence);
+	SentenceIndex.insert(std::pair<std::string, int>(sentence, Sentences.size()));
+	Sentences.push_back(sentence);
     	parser.SplitSentence(sentence, words);
 
     	for (const auto& word : words) IndexSentence(word, sentence);
@@ -38,47 +38,47 @@ void TIndexer::IndexFile(const std::string& filename) {
 }
 
 int TIndexer::FindBlocksIDs(const std::vector<std::string> words, std::vector<int>& ids) const {
-	for (const auto& word : words) {
-		auto it = WordIndex.find(word);
-		if (it == WordIndex.end()) return 1;
-		ids.push_back(it->second);
-	}
-	return 0;
+    for (const auto& word : words) {
+	auto it = WordIndex.find(word);
+	if (it == WordIndex.end()) return 1;
+	ids.push_back(it->second);
+    }
+    return 0;
 }
 
 void TIndexer::FindSentences(const std::vector<std::string> words, std::vector<std::string>& sentences) const {
 
-	std::vector<int> ids;
-	if (FindBlocksIDs(words, ids)) {
-		sentences.clear();
-		return;
-	}
-	std::vector<int> block = BlockOfSentences[ids[0]];
+    std::vector<int> ids;
+    if (FindBlocksIDs(words, ids)) {
+	sentences.clear();
+	return;
+    }
+    std::vector<int> block = BlockOfSentences[ids[0]];
 
-	for (const auto& id : ids) {
-		std::vector<int> next_block = BlockOfSentences[id];
-		std::vector<int> result(block.size());
-		std::vector<int>::iterator end = std::set_intersection(block.begin(), block.end(), 
-				next_block.begin(), next_block.end(), result.begin());
-		result.resize(end - result.begin());
-		block.swap(result);
-	}
+    for (const auto& id : ids) {
+	std::vector<int> next_block = BlockOfSentences[id];
+	std::vector<int> result(block.size());
+	std::vector<int>::iterator end = std::set_intersection(block.begin(), block.end(), 
+			next_block.begin(), next_block.end(), result.begin());
+	result.resize(end - result.begin());
+	block.swap(result);
+    }
 
-	for (const auto& sentence_num : block) {
-		sentences.push_back(Sentences[sentence_num]);
-	}
+    for (const auto& sentence_num : block) {
+	sentences.push_back(Sentences[sentence_num]);
+    }
 }
 
 
 void TIndexer::LoadFromDisk(const std::string& filename) {
     WordIndex.clear();
     BlockOfSentences.clear();
-	SentenceIndex.clear();
-	SentenceIndex.clear();
+    SentenceIndex.clear();
+    SentenceIndex.clear();
 
     size_t count, block_size;
     std::string word, sentence;
-	int sentence_index = 0;
+    int sentence_index = 0;
 
     std::ifstream ifs(filename);
     ifs >> count;
@@ -93,15 +93,15 @@ void TIndexer::LoadFromDisk(const std::string& filename) {
         for (size_t j = 0; j < block_size; ++j) {
             std::getline(ifs, sentence);
 			
-			if (SentenceIndex.find(sentence) != SentenceIndex.end()) {
-				BlockOfSentences[i].push_back(SentenceIndex[sentence]);
-			}
-			else {
-            	BlockOfSentences[i].push_back(sentence_index);
-				SentenceIndex.insert(std::pair<std::string, int>(sentence, sentence_index));
-				Sentences.push_back(sentence);
-				sentence_index++;
-			}
+	    if (SentenceIndex.find(sentence) != SentenceIndex.end()) {
+		BlockOfSentences[i].push_back(SentenceIndex[sentence]);
+	    }
+	    else {
+                BlockOfSentences[i].push_back(sentence_index);
+		SentenceIndex.insert(std::pair<std::string, int>(sentence, sentence_index));
+		Sentences.push_back(sentence);
+		sentence_index++;
+	    }
         }
     }
 }
