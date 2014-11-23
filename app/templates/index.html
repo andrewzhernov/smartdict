@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf8">
+
+        <!-- Latest Jquery -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+        <style>
+            #label {
+                color: red;
+            }
+
+            .input-form {
+                width: 500px;
+                margin: 50px auto;
+            }
+
+            .search-result-group {
+                display: block;
+                width: 500px;
+                margin: 10px auto;
+                background-color: yellow;
+            }
+        </style>
+
+        <script type="text/javascript">
+            function search() {
+                var query = $("#input").val();
+                if (query == "") {
+                    $("#label").html("Incorrect input: empty string");
+                    $("#label").show();
+                } else {
+                    $("#label").hide();
+                    $.ajax({
+                        url: "/search",        
+                        data: {
+                            query: query
+                        },
+                        type: "GET",
+                        dataType: "html",
+                        tryCount : 0,
+                        retryLimit : 5,
+                        success : function(msg) {
+                            $("#result").html(msg);
+                        }
+                    });
+                }
+            }
+
+            $(document).ready(function() {
+                $("#input").keyup(function(event) {
+                    if (event.keyCode == 13) {
+                        search();
+                    }
+                });
+                $("#button").button().click(function() {
+                    search();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="input-form">
+            <div class="input-group">
+                <input id="input" type="text" class="form-control" autofocus />
+                <span class="input-group-btn">
+                    <button id="button" type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+            <div id="label"></div>
+        </div>
+        <div id="result" class="search-result-group"></div>
+    </body>
+</html>
