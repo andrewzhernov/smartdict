@@ -5,6 +5,10 @@ inline bool TParser::IsSentenceSeparator(char c) const {
     return c == '.' || c == '!' || c == '?';
 }
 
+inline bool TParser::IsLetter(char c) const {
+    return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
+}
+
 void TParser::SplitText(const std::string& text, std::vector<std::string>& sentences) const {
     sentences.clear();
 
@@ -18,7 +22,7 @@ void TParser::SplitText(const std::string& text, std::vector<std::string>& sente
             }
         } else {
             if (!isSentence) {
-		while (text[i] == ' ' || text[i] == '\n') i++;
+		while (!IsLetter(text[i])) i++;
                 isSentence = true;
                 begin = i;
             }
@@ -26,9 +30,6 @@ void TParser::SplitText(const std::string& text, std::vector<std::string>& sente
     }
 }
 
-inline bool TParser::IsLetter(char c) const {
-    return ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
-}
 
 void TParser::SplitSentence(const std::string& sentence, std::vector<std::string>& words) const {
     words.clear();
