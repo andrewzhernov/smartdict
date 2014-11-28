@@ -5,15 +5,17 @@
 #include <vector>
 #include "indexer.h"
 
-const std::string INDEX_FILE = "..Yo-Yo/index";
+const std::string INDEX_FILE = "/home/tatiana/Yo-Yo/index";
 const std::string SEPARATOR = "-----------------------";
 const std::string PROGRAMNAME = "SmartDict";
 
-void process_index(std::string argument);
 
-void process_find(std::vector<std::string> argument);
+class TAlgo {
 
-void process_help();
-
+public:
+void ProcessIndex(const std::string argument);
+void ProcessFind(const std::vector<std::string> arguments, const std::vector<std::string> arguments_minus);
+void ProcessHelp();
+};
 
 #endif /* ALGO_H_ */

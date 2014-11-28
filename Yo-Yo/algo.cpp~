@@ -2,18 +2,17 @@
 #include "indexer.cpp"
 
 
-
-void process_index(std::string argument) {
+void TAlgo::ProcessIndex(const std::string argument) {
 	TIndexer indexer;
     indexer.IndexFile(argument);
     indexer.SaveToDisk(INDEX_FILE);
 }
 
-void process_find(std::vector<std::string> arguments) {
+void TAlgo::ProcessFind(const std::vector<std::string> arguments, const std::vector<std::string> arguments_minus) {
 	std::vector<std::string> sentences;
     TIndexer indexer;
     indexer.LoadFromDisk(INDEX_FILE);
-    indexer.FindSentences(arguments, sentences);
+   /* indexer.FindSentences(arguments, arguments_minus, sentences);
     if (sentences.empty()) {
         std::cout << "Not found" << '\n';
     } 
@@ -22,13 +21,13 @@ void process_find(std::vector<std::string> arguments) {
         for (size_t i = 0; i < sentences.size(); ++i) {
             std::cout << sentences[i] << '\n' << SEPARATOR << '\n';
         }
-    }
+    }*/
 }
 
-void process_help() {
+void TAlgo::ProcessHelp() {
 	std::cout << "AVAILABLE COMMANDS:" << '\n';
     std::cout << PROGRAMNAME << " index SOURCE_FILE" << '\n';
-    std::cout << PROGRAMNAME << " find WORD" << '\n';
+    std::cout << PROGRAMNAME << " find WORDS" << '\n';
 }
 
 
