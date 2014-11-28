@@ -1,5 +1,4 @@
 #include "algo.h"
-#include "indexer.cpp"
 
 
 void TAlgo::ProcessIndex(const std::string argument) {

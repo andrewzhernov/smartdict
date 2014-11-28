@@ -12,7 +12,7 @@ void TAlgo::ProcessFind(const std::vector<std::string> arguments, const std::vec
 	std::vector<std::string> sentences;
     TIndexer indexer;
     indexer.LoadFromDisk(INDEX_FILE);
-   /* indexer.FindSentences(arguments, arguments_minus, sentences);
+    indexer.FindSentences(arguments, arguments_minus, sentences);
     if (sentences.empty()) {
         std::cout << "Not found" << '\n';
     } 
@@ -21,7 +21,7 @@ void TAlgo::ProcessFind(const std::vector<std::string> arguments, const std::vec
         for (size_t i = 0; i < sentences.size(); ++i) {
             std::cout << sentences[i] << '\n' << SEPARATOR << '\n';
         }
-    }*/
+    }
 }
 
 void TAlgo::ProcessHelp() {

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "algo.h"
-#include "algo.cpp"
 
 
 int main(int argc, char* argv[]) {

@@ -1,5 +1,4 @@
 #include "indexer.h"
-#include "parser.cpp"
 
 
 void TIndexer::IndexSentence(const std::string& word, const std::string& sentence, size_t sentences_size) {
