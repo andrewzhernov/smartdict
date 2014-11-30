@@ -13,10 +13,10 @@
 
 class TIndexer {
 private:
-    std::map<std::string, size_t> WordIndex;
-    std::vector<boost::dynamic_bitset<> > BlockOfSentences;
-    std::map<std::string, int> SentenceIndex;
-    std::vector<std::string> Sentences;
+    std::map<std::string, size_t> word_index_;
+    std::vector<boost::dynamic_bitset<> > block_of_sentences_;
+    std::map<std::string, int> sentence_index_;
+    std::vector<std::string> sentences_;
 
     int FindBlocksIDs(const std::vector<std::string> words, std::vector<int>& ids) const;
     void IndexSentence(const std::string& word, const std::string& sentence, size_t sentences_size);
