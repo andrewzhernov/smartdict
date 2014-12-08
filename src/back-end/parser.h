@@ -6,6 +6,7 @@
 
 class TParser {
 private:
+    inline bool IsSentenceSeparator(char c) const;
     inline bool IsLetter(char c) const;
 
 public:
