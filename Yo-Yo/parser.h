@@ -5,6 +5,12 @@
 #include <vector>
 #include <algorithm>
 #include <cctype>
+#include <tuple>
+#include <iostream>
+
+using namespace std;
+
+typedef tuple<string, string, string> triple;
 
 class TParser {
 private:
@@ -12,6 +18,7 @@ private:
 
 public:
 	void SplitText(const std::string& text, std::vector<std::string>& sentences) const;
+	void SplitSentenceIntoTriples(const std::string& sentence, std::vector<triple>&) const;
 	void SplitSentence(const std::string& sentence, std::vector<std::string>& words) const;
 };
 
